@@ -21,7 +21,7 @@ const descriptions = [
   'Норм',
 ];
   
-  const names = ['Николай', 'Аким', 'Ким', 'Харитон', 'Тимур', 'Степан'];
+const names = ['Николай', 'Аким', 'Ким', 'Харитон', 'Тимур', 'Степан'];
 
 
 // Ф-я возвращает случайное число из диапозона
@@ -40,17 +40,37 @@ const checkStringLength = (string, length) => string.length <= length;
 const getRandomArrayElement = (array) => {
     return array[getRandomPositiveInteger(0, array.length - 1)];
 };
+// 
+const createMessage = () => 
+  Array.from({ length: getRandomPositiveInteger(1, 2) }, () =>
+    getRandomArrayElement(commentLines)
+  ).join(' ');
 
-const createPhoto = () => {
-    return {
-        id: '',
-        url: '',
-        likes: '',
-        comments: '',
-    }
-};
+// Ф-я формирует объект с данными комментария
+const createComment = (index) => ({
+  id: index,
+  avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+  message: createMessage(),
+  name: getRandomArrayElement(names),
+});
 
-// Ф-я создает массив ис сгенерированных объектов
-// Метод from создаст массив длинной 25 элементов
-// Все элементы будут созданы ф-й билдером
-const similarPhoto = Array.from({length: 25}, createPhoto);
+const createPicture = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElement(descriptions),
+  likes: getRandomPositiveInteger(15, 200),
+  comments: Array.from(
+    { length: getRandomPositiveInteger(0, 6) },
+    (_, commentIndex) => createComment(commentIndex + 1)
+  ),
+});
+
+const getPictures = () =>
+  Array.from({ length: 25 }, (_, pictureIndex) =>
+    createPicture(pictureIndex + 1)
+  );
+  
+  checkStringLength('', 140);
+
+  console.log(getPictures());
+
