@@ -1,4 +1,5 @@
 import { getPictures } from './create-elements.js';
+import { renderPictures } from './picture.js';
 
-console.log(getPictures());
+renderPictures(getPictures());
 
