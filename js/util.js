@@ -15,9 +15,13 @@ const getRandomArrayElement = (array) => {
     return array[getRandomPositiveInteger(0, array.length - 1)];
 };
 
+// Ф-я возвращает нажатие клавиши Esc
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 
 export {
     getRandomPositiveInteger,
     checkStringLength,
     getRandomArrayElement,
+    isEscapeKey,
 };
